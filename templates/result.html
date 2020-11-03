@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+Results
+{% endblock %}
+{% block body %}
+<a href="/">back</a>
+<h1>Welcome to Results</h1>
+<br>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Forks</th>
+    </tr>
+    {% for result in results %}
+    <tr>
+        <td>{{result.name}}</td>
+        <td>{{result.fork_count}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

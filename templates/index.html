@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+Index
+{% endblock %}
+{% block body %}
+<h1>Hello</h1>
+
+<form action="/" method="POST">
+    <label>Org:
+        <input type="text" name="org" id="org">
+    </label>
+    <label>N:
+        <input type="number" name="N" id="N">
+    </label>
+    <label>M:
+        <input type="text" name="M" id="M">
+    </label>
+    <button type="submit">
+        Submit
+    </button>
+</form>
+{% endblock %}
