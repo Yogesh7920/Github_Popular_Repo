@@ -1,7 +1,7 @@
 # Github_Popular_Repo
 A Flask Application to find the popular repos in GitHub of any given organization.
 
-#### run app.py for local testing
+#### execute app.py for local testing (check requirements.txt before executing)
 #### To see the website 
 https://github-popular-repo.herokuapp.com/
 
