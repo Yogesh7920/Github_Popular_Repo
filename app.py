@@ -5,9 +5,9 @@ app = Flask(__name__)
 
 
 def github(org, n, m):
-    repos = requests.get('https://api.github.com/orgs/ORG/repos', {'org': org})
+    repos = requests.get('https://api.github.com/orgs/ORG/repos', {'org': org, 'per_page': 100})
     if repos.status_code != 200:
-        return False
+        return False, repos
     repos = repos.json()
     repos = sorted(repos, key=lambda x: x.get('forks', 0), reverse=True)[:n]
     result = []
@@ -30,23 +30,23 @@ def github(org, n, m):
                 'fork_count': repo.get('forks', 0),
             })
 
-    return result
+    return True, result
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         org = request.form['org']
-        m = int(request.form['M'])
         n = int(request.form['N'])
-        results = github(org, m, n)
-        if results:
+        m = int(request.form['M'])
+        b, results = github(org, n, m)
+        if b:
             return render_template('result.html', results=results, organisation=org, m=m, n=n)
         else:
-            return "Failed, Check your internet connection"
+            return results.reason
 
     return render_template('index.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
