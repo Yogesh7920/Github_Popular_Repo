@@ -4,18 +4,41 @@ Results
 {% endblock %}
 {% block body %}
 <a href="/">back</a>
-<h1>Welcome to Results</h1>
-<br>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Forks</th>
-    </tr>
-    {% for result in results %}
-    <tr>
-        <td>{{result.name}}</td>
-        <td>{{result.fork_count}}</td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="container">
+    <h1>Welcome to Results</h1>
+    <div class="page">
+        <div class="row">
+            <div class="col">Organisation: {{organisation}}</div>
+            <div class="col">N: {{n}}</div>
+            <div class="col">M: {{m}}</div>
+        </div>
+    </div>
+    <table class="table">
+        <tr class="thead">
+            <th>Repo Name</th>
+            <th>Fork Count</th>
+            <th>Contributors</th>
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{result.name}}</td>
+            <td>{{result.fork_count}}</td>
+            <td>
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Contribution</th>
+                    </tr>
+                    {% for contrib in result.commits %}
+                        <tr>
+                            <td>{{contrib.name}}</td>
+                            <td>{{contrib.commits}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}
